@@ -1,0 +1,3 @@
+llvmlite==0.43.0
+pyright==1.1.379
+rply==0.7.8

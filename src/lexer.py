@@ -1,7 +1,7 @@
 from rply import LexerGenerator
 
 class Lexer:
-    def __init__(self) -> None:
+    def __init__(self):
         self.lexer = LexerGenerator()
 
     def _add_tokens(self):
@@ -15,12 +15,12 @@ class Lexer:
 
         # Operators
         self.lexer.add('SUM', r'\+')
-        self.lexer.add('SUB', r'-')
+        self.lexer.add('SUB', r'\-')
         self.lexer.add('MULTIPLY', r'\*')
         # Number
         self.lexer.add('NUMBER', r'\d+')
         # Ignore space
-        self.lexer.ignore('\s+')
+        self.lexer.ignore(r'\s+')
 
     def get_lexer(self):
         self._add_tokens()

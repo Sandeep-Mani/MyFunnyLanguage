@@ -1,2 +1,2 @@
-source ./pyenv/bin/activate
+source ./venv/bin/activate
 python src/main.py
