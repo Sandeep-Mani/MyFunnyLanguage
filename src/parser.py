@@ -1,5 +1,5 @@
 from rply import ParserGenerator
-from mfl_ast import Multiply, Number, Sum, Sub, Print
+from mfl_ast import Divide, Multiply, Number, Sum, Sub, Print
 
 class Parser():
     def __init__(self) -> None:
@@ -7,7 +7,8 @@ class Parser():
         self.pg = ParserGenerator(
             [
                 'PRINT', 'OPEN_PAREN', 'CLOSE_PAREN',
-                'SEMI_COLON', 'SUM', 'SUB', 'NUMBER', 'MULTIPLY'
+                'SEMI_COLON', 'SUM', 'SUB', 'NUMBER', 'MULTIPLY',
+                'DIVIDE'
             ]
         )
 
@@ -19,17 +20,24 @@ class Parser():
         @self.pg.production('expression : expression SUM expression')
         @self.pg.production('expression : expression SUB expression')
         @self.pg.production('expression : expression MULTIPLY expression')
+        @self.pg.production('expression : expression DIVIDE expression')
         def expression(p):
             left = p[0]
             right = p[2]
             operator = p[1]
             if operator.gettokentype() == 'SUM':
                 return Sum(left, right)
+
             elif operator.gettokentype() == 'SUB':
                 return Sub(left, right)
+
             elif operator.gettokentype() == 'MULTIPLY':
                 return Multiply(left, right)
+             
+            elif operator.gettokentype() == 'DIVIDE':
+                return Divide(left, right)
 
+        
         @self.pg.production('expression : NUMBER')
         def number(p):
             return Number(p[0].value)
