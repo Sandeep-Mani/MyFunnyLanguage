@@ -22,6 +22,11 @@ class Multiply(BinaryOp):
     def eval(self):
         return self.left.eval() * self.right.eval()
 
+class Divide(BinaryOp):
+    def eval(self):
+        return self.left.eval() / self.right.eval()
+
+
 class Print():
     def __init__(self, value):
         self.value = value
