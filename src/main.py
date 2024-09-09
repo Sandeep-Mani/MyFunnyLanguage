@@ -1,16 +1,26 @@
-# https://medium.com/@marcelogdeandrade/writing-your-own-programming-language-and-compiler-with-python-a468970ae6df
 from lexer import Lexer
 from parser import Parser
-from pathlib import Path
+
 
 def main():
-    text_input = Path("src/testProgram.mfl").read_text()
-    lexer = Lexer().get_lexer()
-    tokens = lexer.lex(text_input)
-    pg = Parser()
-    pg.parse()
-    parser = pg.get_parser()
-    parser.parse(tokens).eval()
+    lexer = Lexer()
+    parser = Parser()
 
-if (__name__ == "__main__"):
+    code = """
+    for (i = 0; i < 5; i = i + 1) {
+        print(i);
+        if (i == 3) {
+            x = i + 10;
+            print(x);
+        }
+    }
+    """
+
+    tokens = lexer.tokenize(code)
+    print(list(tokens))
+    parsed_program = parser.parse(tokens)
+    parsed_program.eval()
+
+
+if __name__ == "__main__":
     main()
